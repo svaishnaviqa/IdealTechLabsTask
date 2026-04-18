@@ -37,79 +37,47 @@ public class OrangeHRM_AdminPage extends UtilityClass {
 	By noRecord = By.xpath("//span[text()='No Records Found']");
 
 	public void clickAdminMenu() {
-
 		driver.findElement(adminMenu).click();
 	}
 
 	public void clickAddUser() {
-
 		driver.findElement(addBtn).click();
 	}
 
 	public boolean createUser(String role, String employee, String username, String status, String password) {
-
 		selectUserRole(role);
-
 		enterValue(driver.findElement(employeeNameField), employee);
-
 		waitForElementVisible(employeeSuggestion);
-
 		clickButton(driver.findElements(employeeSuggestion).get(0));
-
 		selectStatus(status);
-
-		driver.findElement(usernameField).sendKeys(username);
-
-		driver.findElement(passwordField).sendKeys(password);
-
-		driver.findElement(confirmPassword).sendKeys(password);
-
-		driver.findElement(saveBtn).click();
-
+		enterValue(driver.findElement(usernameField), username);
+		enterValue(driver.findElement(passwordField), password);
+		enterValue(driver.findElement(confirmPassword), password);
+		clickButton(driver.findElement(saveBtn));
 		waitForElementVisible(successMsg);
-
 		String msg = driver.findElement(successMsg).getText();
-
 		return msg.contains("Successfully Saved");
-
 	}
 
-//	public void searchUser(String username) {
-//
-//		waitForElementClickable(searchUser);
-//		
-//		driver.findElement(searchUser).clear();
-//		
-//		driver.findElement(searchUser).sendKeys(username);
-//
-//		driver.findElement(searchBtn).click();
-//	}
 	public void searchUser(String username) {
 		waitForElementVisible(searchUser);
 		waitForElementClickable(searchUser);
-
 		WebElement field = driver.findElement(searchUser);
 		jsClear(field);
 		field.sendKeys(username);
-
 		driver.findElement(searchBtn).click();
 	}
 
 	public boolean isUserPresent(String username) {
-
 		searchUser(username);
-
 		By resultUser = By.xpath("//div[@role='row']//div[text()='" + username + "']");
-
 		waitForElementOrNoResults(resultUser, noRecord);
-
 		return driver.findElements(resultUser).size() > 0;
 	}
 
 	public void editUsername(String username) {
 		driver.findElement(editIcon).click();
 		waitForElementVisible(usernameField);
-
 		WebElement field = driver.findElement(usernameField);
 		field.click();
 		field.sendKeys(Keys.chord(Keys.CONTROL, "a"));
@@ -121,53 +89,34 @@ public class OrangeHRM_AdminPage extends UtilityClass {
 	}
 
 	public void deleteUser(String username) {
-
 		searchUser(username);
-
 		By userRow = By.xpath("//div[@role='row']//div[text()='" + username + "']");
 		waitForElementVisible(userRow);
 		waitForElementClickable(deleteBtn);
-
 		driver.findElement(deleteBtn).click();
-
 		driver.findElement(confirmDelete).click();
 	}
 
 	public void selectUserRole(String roleName) {
-
 		clickButton(driver.findElement(userRoleDropdown));
-
 		waitForElementVisible(userRoleOptions);
-
 		List<WebElement> roles = driver.findElements(userRoleOptions);
-
 		for (WebElement role : roles) {
-
 			String text = role.getText();
-
 			if (text.equalsIgnoreCase(roleName)) {
-
 				role.click();
-
 				break;
 			}
 		}
 	}
 
 	public void selectStatus(String statusName) {
-
 		clickButton(driver.findElement(statusDropdown));
-
 		waitForElementVisible(statusOptions);
-
 		List<WebElement> statusList = driver.findElements(statusOptions);
-
 		for (WebElement status : statusList) {
-
 			if (status.getText().equalsIgnoreCase(statusName)) {
-
 				status.click();
-
 				break;
 			}
 		}

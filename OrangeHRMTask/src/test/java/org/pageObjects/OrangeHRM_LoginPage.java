@@ -18,11 +18,8 @@ public class OrangeHRM_LoginPage extends UtilityClass{
 	    public void login(String user,String pass) {
 	    	
 	    	waitForElementVisible(username);
-
 	    	enterValue(driver.findElement(username), user);
-	    	
 	    	enterValue(driver.findElement(password), pass);
-	    	
 	    	clickButton(driver.findElement(loginBtn));
 	    }
 	}

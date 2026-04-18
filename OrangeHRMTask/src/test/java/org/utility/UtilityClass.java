@@ -1,27 +1,22 @@
 package org.utility;
 
-import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.time.Duration;
 import java.util.Properties;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.chrome.ChromeOptions;
 
 public class UtilityClass {
 	public static WebDriver driver;
@@ -37,15 +32,12 @@ public class UtilityClass {
 			options.addArguments("--disable-extensions");
 			options.addArguments("--disable-popup-blocking");
 			options.addArguments("--disable-password-manager-reauthentication");
-
-			// Add these two new ones to suppress password breach popup
 			options.addArguments("--password-store=basic");
-			options.addArguments("--disable-features=PasswordCheck,LeakDetection");  // ← key fix
-
+			options.addArguments("--disable-features=PasswordCheck,LeakDetection");
 			options.setExperimentalOption("prefs", new java.util.HashMap<String, Object>() {{
 			    put("credentials_enable_service", false);
 			    put("profile.password_manager_enabled", false);
-			    put("profile.password_manager_leak_detection", false);  // ← add this
+			    put("profile.password_manager_leak_detection", false);
 			}});
 
 	        driver = new ChromeDriver(options);
@@ -63,7 +55,6 @@ public class UtilityClass {
 		}
 		driver.manage().window().maximize();
 		return driver;
-
 	}
 
 	public static void quitDriver() {
@@ -75,7 +66,6 @@ public class UtilityClass {
 
 	public void implicitWait(long sec) {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-
 	}
 
 	public void enterValue(WebElement e, String value) {
@@ -90,40 +80,20 @@ public class UtilityClass {
 
 	}
 
-//	public void jsSendKeys(WebElement e, String input) {
-//		JavascriptExecutor js = (JavascriptExecutor) driver;
-//		js.executeScript("arguments[0].setAttribute('value','" + input + "')", e);
-//
-//	}
-	
 	public void jsSendKeys(WebElement e, String input) {
-
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		
-		js.executeScript(
-		        "arguments[0].value='" + input + "';" +
-		        "arguments[0].dispatchEvent(new Event('input',{bubbles:true}));" +
-		        "arguments[0].dispatchEvent(new Event('change',{bubbles:true}));",
-		        e
-		    );
-	}
+		js.executeScript("arguments[0].setAttribute('value','" + input + "')", e);
 
+	}
+	
 	public void jsClick(WebElement e) {
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].click()", e);
 
 	}
 	
-//	public void jsClear(WebElement element) {
-//
-//	    JavascriptExecutor js = (JavascriptExecutor) driver;
-//	    js.executeScript("arguments[0].value='';", element);
-//	}
-	
 	public void jsClear(WebElement e) {
-
 	    JavascriptExecutor js = (JavascriptExecutor) driver;
-
 	    js.executeScript(
 	        "arguments[0].value=''; arguments[0].dispatchEvent(new Event('input'));",
 	        e
@@ -151,30 +121,6 @@ public class UtilityClass {
 		return e.getText();
 	}
 
-	public void takesScreensshot(String image) {
-		try {
-			FileUtils.copyFile(((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE), new File(
-					System.getProperty("user.dir") + "\\src\\test\\resources\\Screenshots\\" + image + ".png"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public String getProperty(String key) {
-		String pr = null;
-		try {
-			Properties p = new Properties();
-			FileReader fl = new FileReader(
-					System.getProperty("user.dir") + "\\src\\test\\resources\\Config\\config.properties");
-			p.load(fl);
-			pr = p.getProperty(key);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return pr;
-	}
-
 	public static String getValueFromPropertFile(String key) {
 		String value = null;
 		try {
@@ -189,27 +135,23 @@ public class UtilityClass {
 
 	}
 
-	public static void takeScreenshot(WebDriver driver, String name) {
-		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-		try {
-			File path = new File("src/test/resources/screenshots/" + name + ".png");
-			FileUtils.copyFile(src, path);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void takeScreenshot(WebDriver driver, String name) {
+//		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+//		try {
+//			File path = new File("src/test/resources/screenshots/" + name + ".png");
+//			FileUtils.copyFile(src, path);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//	}
 	
 	public void waitForElementVisible(By locator) {
-
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
 	    wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 	
 	public void waitForElementClickable(By locator) {
-
 	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-
 	    wait.until(ExpectedConditions.elementToBeClickable(locator));
 	}
 	

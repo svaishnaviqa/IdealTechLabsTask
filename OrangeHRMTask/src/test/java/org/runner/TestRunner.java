@@ -9,7 +9,7 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features="src/test/resources",
+@CucumberOptions(features="src/test/resources/Features",
                  glue="org.stepdefinition",
                  dryRun=false, 
                  stepNotifications=true,
@@ -18,18 +18,13 @@ import io.cucumber.junit.CucumberOptions;
                 		 "json:src\\test\\resources\\Reports\\JsonReport\\report.json"}
 )
 public class TestRunner {
-	
-	
 	@BeforeClass
 	public static void startReportGen() {
 		ExtentReport.startReport();
-
 	}
 
 	@AfterClass
 	public static void closeReportGen() {
 		ExtentReport.endReport();
-
 	}
-
 }

@@ -18,7 +18,6 @@ public class Hooks extends UtilityClass {
 		driver.manage().deleteAllCookies();
 		implicitWait(20); 
 		ExtentReport.createTest(scenario);
-
 	}
 
 	@After
