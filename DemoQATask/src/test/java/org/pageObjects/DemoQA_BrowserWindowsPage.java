@@ -47,7 +47,7 @@ public class DemoQA_BrowserWindowsPage extends UtilityClass {
     }
 
     public void clickNewTabButton() {
-        waitForElementClickable(NEW_TAB_BUTTON_LOC);
+        waitForElementVisible(NEW_TAB_BUTTON_LOC);
         clickButton(newTabButton);
     }
 

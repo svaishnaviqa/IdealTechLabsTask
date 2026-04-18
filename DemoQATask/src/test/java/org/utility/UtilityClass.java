@@ -13,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -26,7 +27,6 @@ public class UtilityClass {
 
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
-
 			options.addArguments("--disable-notifications");
 			options.addArguments("--disable-save-password-bubble");
 			options.addArguments("--disable-infobars");
@@ -55,7 +55,6 @@ public class UtilityClass {
 		}
 		driver.manage().window().maximize();
 		return driver;
-
 	}
 
 	public static void quitDriver() {
@@ -74,15 +73,33 @@ public class UtilityClass {
 		js.executeScript("arguments[0].click()", e);
 	}
 
+//	public void clickButton(WebElement e) {
+//		JavascriptExecutor js = (JavascriptExecutor) driver;
+//	    js.executeScript("arguments[0].scrollIntoView(true);", e);
+//	    
+//		WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(20));
+//		w.until(ExpectedConditions.elementToBeClickable(e));
+//		try {
+//			e.click();
+//		} catch (Exception ex) {
+//			jsClick(e);
+//			ex.printStackTrace();
+//		}
+//	}
+	
 	public void clickButton(WebElement e) {
-		WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(20));
-		w.until(ExpectedConditions.elementToBeClickable(e));
-		try {
-			e.click();
-		} catch (Exception ex) {
-			jsClick(e);
-			ex.printStackTrace();
-		}
+
+	    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+	    try {
+	        JavascriptExecutor js = (JavascriptExecutor) driver;
+	        js.executeScript("arguments[0].scrollIntoView({block:'center'});", e);
+	        wait.until(ExpectedConditions.elementToBeClickable(e));
+	        e.click();
+	    } catch (Exception ex) {
+	        JavascriptExecutor js = (JavascriptExecutor) driver;
+	        js.executeScript("arguments[0].click();", e);
+	    }
 	}
 
 	public String getText(WebElement e) {

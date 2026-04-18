@@ -11,7 +11,6 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(features="src/test/resources/Features",
                  glue="org.stepdefinition",
-                 tags = "@test",
                  dryRun=false, 
                  stepNotifications=true,
                  monochrome=true,

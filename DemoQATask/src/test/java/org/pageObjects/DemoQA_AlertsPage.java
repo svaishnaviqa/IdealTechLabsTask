@@ -35,13 +35,11 @@ public class DemoQA_AlertsPage extends UtilityClass {
 
     public static final By ALERT_BUTTON_LOC   = By.id("alertButton");
     public static final By CONFIRM_BUTTON_LOC = By.id("confirmButton");
-    public static final By PROMPT_BUTTON_LOC  = By.id("promtButton");   // note: DemoQA typo
+    public static final By PROMPT_BUTTON_LOC  = By.id("promtButton"); 
     public static final By CONFIRM_RESULT_LOC = By.id("confirmResult");
     public static final By PROMPT_RESULT_LOC  = By.id("promptResult");
 
-
     public static final By ALERTS_MENU_ITEM = By.xpath("//span[text()='Alerts']");
-
 
     public DemoQA_AlertsPage() {
         PageFactory.initElements(driver, this);
