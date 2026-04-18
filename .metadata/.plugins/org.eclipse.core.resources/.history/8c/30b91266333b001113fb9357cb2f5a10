@@ -1,0 +1,190 @@
+package org.stepdefinition;
+
+import static org.junit.Assert.*;
+
+import java.util.Set;
+
+import org.pageObjects.DemoQA_BrowserWindowsPage;
+import org.utility.ExtentReport;
+import org.utility.UtilityClass;
+
+import io.cucumber.java.en.*;
+
+/**
+ * Step Definitions for DemoQA Browser Windows feature.
+ *
+ * Covers all 5 task steps:
+ *   1. Navigate to https://demoqa.com/links
+ *   2. Handle Alerts, Frames & Windows – click accordion group
+ *   3. Click Browser Windows menu item
+ *   4. Open new tab → verify URL and heading text
+ *   5. Switch back to original tab → verify URL
+ */
+public class DemoQA_BrowserWindowSteps extends UtilityClass {
+
+    // ── URLs / text loaded from config.properties ─────────────────────────────
+    private static final String DEMOQA_LINKS_URL          = getValueFromPropertFile("demoqa.links.url");
+    private static final String NEW_TAB_EXPECTED_URL      = getValueFromPropertFile("demoqa.newtab.expected.url");
+    private static final String NEW_TAB_EXPECTED_HEADING  = getValueFromPropertFile("demoqa.newtab.expected.heading");
+
+    // ── State ─────────────────────────────────────────────────────────────────
+    private DemoQA_BrowserWindowsPage page;
+    private String originalWindowHandle;
+    private String newTabHandle;
+
+    // =========================================================================
+    // BACKGROUND
+    // =========================================================================
+
+    /**
+     * Step 1 – Navigate to https://demoqa.com/links.
+     * The task requires this specific URL as the starting point.
+     */
+    @Given("user navigates to DemoQA Browser Windows page")
+    public void userNavigatesToDemoQALinksPage() {
+        driver.get(DEMOQA_LINKS_URL);
+        originalWindowHandle = driver.getWindowHandle();
+        page = new DemoQA_BrowserWindowsPage();
+
+        ExtentReport.test.info("Step 1 – Navigated to: " + DEMOQA_LINKS_URL);
+        ExtentReport.test.info("Original window handle: " + originalWindowHandle);
+    }
+
+    // =========================================================================
+    // NAVIGATION
+    // =========================================================================
+
+    /**
+     * Step 2 – Click the "Alerts, Frame & Windows" accordion group
+     * to handle the Alerts, Frames & Windows section as required by the task.
+     */
+    @Given("User clicks on {string} in the left panel")
+    public void userClicksOnGroupInLeftPanel(String groupName) {
+        page.clickAlertsFrameWindowsGroup();
+        ExtentReport.test.info("Step 2 – Expanded accordion group: " + groupName);
+    }
+
+    /**
+     * Step 3 – Click the "Browser Windows" menu item and verify navigation.
+     */
+    @And("User clicks on {string} menu item")
+    public void userClicksOnMenuItem(String menuItem) {
+        page.clickBrowserWindowsMenuItem();
+
+        String currentUrl = page.getCurrentPageUrl();
+        String expectedUrlFragment = "browser-windows";
+
+        assertTrue(
+            "Expected URL to contain '" + expectedUrlFragment + "' but was: " + currentUrl,
+            currentUrl.contains(expectedUrlFragment)
+        );
+
+        ExtentReport.test.pass("Step 3 – Navigated to Browser Windows page. URL: " + currentUrl);
+    }
+
+    // =========================================================================
+    // ACTION
+    // =========================================================================
+
+    /**
+     * Step 4a – Click the specified button and wait for a new tab to appear.
+     */
+    @When("User clicks the {string} button")
+    public void userClicksTheButton(String buttonLabel) {
+        Set<String> handlesBefore = driver.getWindowHandles();
+
+        if (buttonLabel.equalsIgnoreCase("New Tab")) {
+            page.clickNewTabButton();
+        }
+
+        ExtentReport.test.info("Step 4 – Clicked button: " + buttonLabel);
+
+        // Poll up to 5 s for the new tab handle to appear
+        long deadline = System.currentTimeMillis() + 5_000;
+        while (System.currentTimeMillis() < deadline) {
+            Set<String> handlesAfter = driver.getWindowHandles();
+            if (handlesAfter.size() > handlesBefore.size()) {
+                handlesAfter.removeAll(handlesBefore);
+                newTabHandle = handlesAfter.iterator().next();
+                break;
+            }
+            try { Thread.sleep(300); } catch (InterruptedException ignored) {}
+        }
+
+        assertNotNull("New tab did not open within the 5-second timeout.", newTabHandle);
+        ExtentReport.test.info("Step 4 – New tab detected. Handle: " + newTabHandle);
+    }
+
+    // =========================================================================
+    // VERIFICATION – NEW TAB
+    // =========================================================================
+
+    /**
+     * Step 4b – Switch to the new tab and verify its URL.
+     */
+    @Then("A new tab should open with the expected URL")
+    public void aNewTabShouldOpenWithExpectedURL() {
+        driver.switchTo().window(newTabHandle);
+
+        String actualUrl = driver.getCurrentUrl();
+        ExtentReport.test.info("Step 4 – New tab URL: " + actualUrl);
+
+        assertEquals(
+            "New tab URL mismatch.\nExpected : " + NEW_TAB_EXPECTED_URL
+          + "\nActual   : " + actualUrl,
+            NEW_TAB_EXPECTED_URL, actualUrl
+        );
+
+        ExtentReport.test.pass("Step 4 – New tab opened at expected URL: " + actualUrl);
+    }
+
+    /**
+     * Step 4c – Verify the heading text on the new-tab page.
+     * This confirms the correct page content loaded, not just the URL.
+     */
+    @And("The new tab should display the heading {string}")
+    public void theNewTabShouldDisplayTheHeading(String expectedHeading) {
+        // We are already on the new tab from the previous step
+        String actualHeading = page.getSampleHeadingText();
+
+        ExtentReport.test.info("Step 4 – New tab heading: " + actualHeading);
+
+        assertEquals(
+            "New tab heading mismatch.\nExpected : " + expectedHeading
+          + "\nActual   : " + actualHeading,
+            expectedHeading, actualHeading
+        );
+
+        ExtentReport.test.pass("Step 4 – New tab heading verified: " + actualHeading);
+    }
+
+    // =========================================================================
+    // STEP 5 – SWITCH BACK AND VERIFY ORIGINAL TAB
+    // =========================================================================
+
+    /**
+     * Step 5a – Switch focus back to the original tab.
+     */
+    @When("User switches back to the original tab")
+    public void userSwitchesBackToOriginalTab() {
+        driver.switchTo().window(originalWindowHandle);
+        ExtentReport.test.info("Step 5 – Switched back to original tab. Handle: " + originalWindowHandle);
+    }
+
+    /**
+     * Step 5b – Confirm the original tab still shows the Browser Windows page.
+     */
+    @Then("The original tab should still display the Browser Windows page")
+    public void originalTabShouldDisplayBrowserWindowsPage() {
+        String currentUrl = driver.getCurrentUrl();
+
+        ExtentReport.test.info("Step 5 – Original tab URL after switch-back: " + currentUrl);
+
+        assertTrue(
+            "Expected original tab URL to contain 'browser-windows' but was: " + currentUrl,
+            currentUrl.contains("browser-windows")
+        );
+
+        ExtentReport.test.pass("Step 5 – Original tab still on Browser Windows page: " + currentUrl);
+    }
+}

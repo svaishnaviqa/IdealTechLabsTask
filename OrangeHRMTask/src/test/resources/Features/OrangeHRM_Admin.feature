@@ -1,0 +1,21 @@
+Feature: OrangeHRM Admin User Management
+
+  Scenario: Create, Edit, Search and Delete User
+    Given I navigate to OrangeHRM login page
+    And I login with valid credentials
+      | username | password |
+      | Admin    | admin123 |
+    When I navigate to Admin menu
+    And I create a new user with details
+      | userRole | employeeName | username  | status  | password |
+      | Admin    | a| testuser8 | Enabled | Test@123 |
+    Then I should see the user created successfully
+
+    When I search the created user "testuser8"
+    And I edit the user details
+      | username |
+      | testuser8_updated |
+    Then I verify the user is updated
+
+    When I delete the user "testuser8_updated"
+    Then I verify the user is deleted

@@ -1,0 +1,143 @@
+package org.stepdefinition;
+
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Assert;
+import org.pageObjects.CartPage;
+import org.pageObjects.CheckOutPage;
+import org.pageObjects.HomePage;
+import org.pageObjects.LoginPage;
+import org.utility.ExtentReport;
+//import org.utility.ExtentReportManager;
+import org.utility.UtilityClass;
+
+import com.aventstack.extentreports.Status;
+
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class SauceDemo_CheckoutSteps extends UtilityClass {
+	private LoginPage loginPage;
+	private HomePage homePage;
+	private CartPage cartPage;
+	private CheckOutPage checkoutPage;
+	private double itemTotal = 0.0;
+
+	@Before(order = 2)
+	public void setupPages() {
+		loginPage = new LoginPage(driver);
+		homePage = new HomePage(driver);
+		cartPage = new CartPage(driver);
+		checkoutPage = new CheckOutPage(driver);
+	}
+
+	@Given("I am on the home page")
+	public void i_am_on_the_home_page() {
+		driver.get(getValueFromPropertFile("base.url"));
+		 ExtentReport.test.log(Status.INFO, "Navigated to SauceDemo home page");
+	}
+
+	@And("I login in with the following details")
+	public void i_login(DataTable table) {
+		Map<String, String> data = table.asMaps().get(0);
+		loginPage.login(data.get("userName"), data.get("Password"));
+		 ExtentReport.test.log(Status.INFO, "Logged in with user: " +
+		 data.get("userName"));
+	}
+
+	@And("I add the following items to the basket")
+	public void add_items(DataTable table) throws InterruptedException {
+		for (String item : table.asList()) {
+			homePage.addItemToCart(item);
+			Thread.sleep(2000);
+			 ExtentReport.test.log(Status.INFO, "Added item to cart: " +
+			 item);
+		}
+	}
+
+	@And("I should see {int} items added to the shopping cart")
+	public void verify_item_count(int count) {
+		int actual = homePage.getCartCount();
+		 ExtentReport.test.log(Status.INFO, "Expected cart count: " +count + ", Actual: " + actual);
+		Assert.assertEquals(count, actual);
+	}
+
+	@And("I click on the shopping cart")
+	public void click_cart() {
+		homePage.openCart();
+		 ExtentReport.test.log(Status.INFO, "Clicked on shopping cart");
+	}
+
+	@And("I verify that the QTY count for each item should be {int}")
+	public void verify_qty_count(Integer expectedQty) {
+		List<String> quantities = cartPage.getAllQuantities();
+
+		for (String qty : quantities) {
+			Assert.assertEquals("Each item's quantity should be " + expectedQty, expectedQty.toString(), qty);
+		}
+	}
+
+	@And("I remove the following item:")
+	public void remove_items(DataTable table) throws InterruptedException {
+		for (String item : table.asList()) {
+			cartPage.removeItem(item);
+			Thread.sleep(2000);
+			 ExtentReport.test.log(Status.INFO, "Added item to cart: " +
+			 item);
+		}
+
+		// ExtentReportManager.getTest().log(Status.INFO, "Removed item from cart: " +
+		// item);
+
+	}
+
+	@And("I click on the CHECKOUT button")
+	public void click_checkout() {
+		cartPage.clickCheckout();
+		 ExtentReport.test.log(Status.INFO, "Clicked on CHECKOUT button");
+	}
+
+	@And("I type {string} for First Name")
+	public void enter_first_name(String firstName) {
+		checkoutPage.enterFirstName(firstName);
+		 ExtentReport.test.log(Status.INFO, "Entered First Name: " +firstName);
+	}
+
+	@And("I type {string} for Last Name")
+	public void enter_last_name(String lastName) {
+		checkoutPage.enterLastName(lastName);
+		 ExtentReport.test.log(Status.INFO, "Entered Last Name: " +lastName);
+	}
+
+	@Given("I type {string} for ZIP\\/Postal Code")
+	public void i_type_for_zip_postal_code(String postalCode) {
+		checkoutPage.enterZip(postalCode);
+		 ExtentReport.test.log(Status.INFO, "Entered ZIP: " + postalCode);
+	}
+
+	@When("I click on the CONTINUE button")
+	public void click_continue() {
+		checkoutPage.clickContinue();
+		ExtentReport.test.log(Status.INFO, "Clicked on CONTINUE button");
+	}
+
+	@Then("Item total will be equal to the total of items on the list")
+	public void validate_item_total() {
+		itemTotal = checkoutPage.getItemTotal();
+		ExtentReport.test.log(Status.INFO, "Captured item total: $" +itemTotal);
+		Assert.assertTrue("Item total should be > 0", itemTotal > 0);
+	}
+
+	@And("a Tax rate of {int} % is applied to the total")
+	public void verify_tax_rate(int rate) {
+		double actualTax = checkoutPage.getTax();
+		double expectedTax = checkoutPage.getExpectedTax(itemTotal);
+		ExtentReport.test.log(Status.INFO, "Expected tax: $" +expectedTax + ", Actual tax: $" + actualTax);
+		Assert.assertEquals(expectedTax, actualTax, 0.01);
+	}
+}

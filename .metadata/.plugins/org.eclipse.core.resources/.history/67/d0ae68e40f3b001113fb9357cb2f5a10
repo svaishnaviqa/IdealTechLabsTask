@@ -1,0 +1,54 @@
+package org.pageObjects;
+
+import java.util.Set;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class DemoQA_BrowserWindowsPage {
+
+    WebDriver driver;
+
+    By alertsFrameWindowsMenu = By.xpath("//div[text()='Alerts, Frame & Windows']");
+    By browserWindowsSubMenu = By.xpath("//span[text()='Browser Windows']");
+    By newTabBtn = By.id("tabButton");
+    By newTabText = By.id("sampleHeading");
+
+    public DemoQA_BrowserWindowsPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void navigateToBrowserWindows() {
+
+        driver.get("https://demoqa.com/links");
+
+        driver.findElement(alertsFrameWindowsMenu).click();
+        driver.findElement(browserWindowsSubMenu).click();
+    }
+
+    public void openNewTabAndVerify() {
+
+        String parentWindow = driver.getWindowHandle();
+
+        driver.findElement(newTabBtn).click();
+
+        Set<String> allWindows = driver.getWindowHandles();
+
+        for (String window : allWindows) {
+
+            if (!window.equals(parentWindow)) {
+
+                driver.switchTo().window(window);
+
+                String text = driver.findElement(newTabText).getText();
+
+                if (!text.equals("This is a sample page")) {
+                    throw new AssertionError("New tab text not matched");
+                }
+
+                driver.close();
+            }
+        }
+
+        driver.switchTo().window(parentWindow);
+    }
+}

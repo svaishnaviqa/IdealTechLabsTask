@@ -1,0 +1,59 @@
+package org.pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+
+public class DemoQA_BrowserWindowsPage {
+
+	WebDriver driver;
+    WebDriverUtility util;
+
+    By alertsFrameWindows = By.xpath("//div[text()='Alerts, Frame & Windows']");
+    By browserWindows = By.xpath("//span[text()='Browser Windows']");
+    By newTabBtn = By.id("tabButton");
+    By sampleText = By.id("sampleHeading");
+
+    public BrowserWindowsPage(WebDriver driver) {
+
+        this.driver = driver;
+        util = new WebDriverUtility(driver);
+    }
+
+    public void openBrowserWindowsPage() {
+
+        util.openUrl("https://demoqa.com/links");
+
+        util.click(alertsFrameWindows);
+
+        util.click(browserWindows);
+    }
+
+    public String clickNewTab() {
+
+        String parent = driver.getWindowHandle();
+
+        util.click(newTabBtn);
+
+        util.switchToNewTab();
+
+        return parent;
+    }
+
+    public String getSampleText() {
+
+        return util.getText(sampleText);
+    }
+
+    public void switchBack(String parent) {
+
+        driver.close();
+
+        util.switchToParentTab(parent);
+    }
+
+    public String getCurrentUrl() {
+
+        return util.getCurrentUrl();
+    }
+}

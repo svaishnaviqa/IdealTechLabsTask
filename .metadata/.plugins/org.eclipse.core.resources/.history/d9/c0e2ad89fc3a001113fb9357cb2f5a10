@@ -1,0 +1,36 @@
+package org.stepdefinition;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+//import org.openqa.selenium.WebDriver;
+import org.utility.ExtentReport;
+import org.utility.UtilityClass;
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+
+public class Hooks extends UtilityClass {
+
+	@Before(order = 1)
+	public void setup(Scenario scenario) {
+		driver = UtilityClass.getDriver(getValueFromPropertFile("browser"));
+		driver.manage().deleteAllCookies();
+		ExtentReport.createTest(scenario);
+
+	}
+
+	@After
+	public void tearDown(Scenario scenario) {
+		ExtentReport.createTestLog(scenario);
+		if (scenario.isFailed()) {
+			TakesScreenshot tk = (TakesScreenshot) driver;
+			String screenshotBase64 = tk.getScreenshotAs(OutputType.BASE64);
+
+			ExtentReport.attachScreenshot(screenshotBase64);
+		} else {
+
+		}
+		UtilityClass.quitDriver();
+	}
+}

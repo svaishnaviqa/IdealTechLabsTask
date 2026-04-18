@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestRunner (1)" project="OrangeHRMTask" tests="10" started="10" failures="2" errors="0" ignored="0">
+  <testsuite name="org.runner.TestRunner" time="15.338">
+    <testsuite name="OrangeHRM Admin User Management" time="15.338">
+      <testsuite name="Create, Edit, Search and Delete User" time="15.338" incomplete="true">
+        <failure>java.lang.AssertionError&#13;
+	at org.junit.Assert.fail(Assert.java:87)&#13;
+	at org.junit.Assert.assertTrue(Assert.java:42)&#13;
+	at org.junit.Assert.assertTrue(Assert.java:53)&#13;
+	at org.stepdefinition.OrangeHRM_AdminSteps.verify_user_created(OrangeHRM_AdminSteps.java:77)&#13;
+	at ✽.I should see the user created successfully(file:///D:/IdealTechLabs/OrangeHRMTask/src/test/resources/Features/OrangeHRM_Admin.feature:12)&#13;
+&#13;
+</failure>
+        <testcase name="I navigate to OrangeHRM login page" classname="Create, Edit, Search and Delete User" time="5.914"/>
+        <testcase name="I login with valid credentials" classname="Create, Edit, Search and Delete User" time="0.869"/>
+        <testcase name="I navigate to Admin menu" classname="Create, Edit, Search and Delete User" time="2.857"/>
+        <testcase name="I create a new user with details" classname="Create, Edit, Search and Delete User" time="5.562"/>
+        <testcase name="I should see the user created successfully" classname="Create, Edit, Search and Delete User" time="0.12">
+          <failure>java.lang.AssertionError&#13;
+	at org.junit.Assert.fail(Assert.java:87)&#13;
+	at org.junit.Assert.assertTrue(Assert.java:42)&#13;
+	at org.junit.Assert.assertTrue(Assert.java:53)&#13;
+	at org.stepdefinition.OrangeHRM_AdminSteps.verify_user_created(OrangeHRM_AdminSteps.java:77)&#13;
+	at ✽.I should see the user created successfully(file:///D:/IdealTechLabs/OrangeHRMTask/src/test/resources/Features/OrangeHRM_Admin.feature:12)&#13;
+&#13;
+</failure>
+        </testcase>
+        <testcase name="I search the created user &quot;testuser1&quot;" classname="Create, Edit, Search and Delete User" time="0.006">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I edit the user details" classname="Create, Edit, Search and Delete User" time="0.002">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I verify the user is updated" classname="Create, Edit, Search and Delete User" time="0.0">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I delete the user &quot;testuser1_updated&quot;" classname="Create, Edit, Search and Delete User" time="0.0">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I verify the user is deleted" classname="Create, Edit, Search and Delete User" time="0.0">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testrun>

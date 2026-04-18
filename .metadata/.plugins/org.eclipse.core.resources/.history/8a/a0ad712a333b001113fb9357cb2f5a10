@@ -1,0 +1,8 @@
+Feature: DemoQA Browser Windows
+
+  Scenario: Verify new tab functionality
+
+    Given user navigates to DemoQA Browser Windows page
+    When user clicks on New Tab button
+    Then new tab should open and display sample text
+    And user switches back to original tab

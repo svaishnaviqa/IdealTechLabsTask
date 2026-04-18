@@ -1,0 +1,5 @@
+browser=chrome
+demoqa.links.url=https://demoqa.com/links
+demoqa.browser.windows.url=https://demoqa.com/browser-windows
+demoqa.newtab.expected.url=https://demoqa.com/sample
+demoqa.newtab.expected.heading=This is a sample page

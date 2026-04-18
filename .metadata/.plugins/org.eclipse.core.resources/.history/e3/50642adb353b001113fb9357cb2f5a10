@@ -1,0 +1,87 @@
+package org.pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.utility.UtilityClass;
+
+/**
+ * Page Object for https://demoqa.com/frames
+ *
+ * The page contains two iframes stacked vertically:
+ *   - frame1  (top frame,    id="frame1")
+ *   - frame2  (bottom frame, id="frame2")
+ *
+ * Both frames load https://demoqa.com/sample and show
+ * a heading with id="sampleHeading".
+ *
+ * Usage pattern:
+ *   1. switchToTopFrame()    → interact with top frame
+ *   2. switchToDefaultContent() → return to main page
+ *   3. switchToBottomFrame() → interact with bottom frame
+ *   4. switchToDefaultContent() → return to main page
+ */
+public class DemoQA_FramesPage extends UtilityClass {
+
+    // ── Heading inside each frame ─────────────────────────────────────────────
+
+    /** Heading element rendered inside whichever frame is currently active. */
+    @FindBy(id = "sampleHeading")
+    private WebElement sampleHeading;
+
+    // ── By-locators ───────────────────────────────────────────────────────────
+
+    public static final By FRAME_TOP_LOC    = By.id("frame1");
+    public static final By FRAME_BOTTOM_LOC = By.id("frame2");
+    public static final By SAMPLE_HDG_LOC   = By.id("sampleHeading");
+
+    // ── Left-panel navigation locator ─────────────────────────────────────────
+
+    public static final By FRAMES_MENU_ITEM = By.xpath("//span[text()='Frames']");
+
+    // ── Constructor ───────────────────────────────────────────────────────────
+
+    public DemoQA_FramesPage() {
+        PageFactory.initElements(driver, this);
+    }
+
+    // ── Navigation ────────────────────────────────────────────────────────────
+
+    public void clickFramesMenuItem() {
+        waitForElementVisible(FRAMES_MENU_ITEM);
+        clickButton(driver.findElement(FRAMES_MENU_ITEM));
+    }
+
+    // ── Frame switching ───────────────────────────────────────────────────────
+
+    /** Switch driver context into the top iframe (frame1). */
+    public void switchToTopFrame() {
+        waitForElementVisible(FRAME_TOP_LOC);
+        driver.switchTo().frame(driver.findElement(FRAME_TOP_LOC));
+    }
+
+    /** Switch driver context into the bottom iframe (frame2). */
+    public void switchToBottomFrame() {
+        waitForElementVisible(FRAME_BOTTOM_LOC);
+        driver.switchTo().frame(driver.findElement(FRAME_BOTTOM_LOC));
+    }
+
+    /** Return driver context to the main document (exit any frame). */
+    public void switchToDefaultContent() {
+        driver.switchTo().defaultContent();
+    }
+
+    // ── Getters ───────────────────────────────────────────────────────────────
+
+    /**
+     * Reads the heading text from whichever frame is currently active.
+     * Call switchToTopFrame() or switchToBottomFrame() first.
+     */
+    public String getFrameHeadingText() {
+        // Re-init PageFactory so @FindBy picks up elements inside the active frame
+        PageFactory.initElements(driver, this);
+        waitForElementVisible(SAMPLE_HDG_LOC);
+        return getText(sampleHeading);
+    }
+}

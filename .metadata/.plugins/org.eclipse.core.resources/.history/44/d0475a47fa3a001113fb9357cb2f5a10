@@ -1,0 +1,42 @@
+package org.pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class CheckOutPage {
+	WebDriver driver;
+
+	public CheckOutPage(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	public void enterFirstName(String firstName) {
+		driver.findElement(By.id("first-name")).sendKeys(firstName);
+	}
+
+	public void enterLastName(String lastName) {
+		driver.findElement(By.id("last-name")).sendKeys(lastName);
+	}
+
+	public void enterZip(String zip) {
+		driver.findElement(By.id("postal-code")).sendKeys(zip);
+	}
+
+	public void clickContinue() {
+		driver.findElement(By.id("continue")).click();
+	}
+
+	public double getItemTotal() {
+		return Double.parseDouble(
+				driver.findElement(By.className("summary_subtotal_label")).getText().replaceAll("[^0-9.]", ""));
+	}
+
+	public double getTax() {
+		return Double
+				.parseDouble(driver.findElement(By.className("summary_tax_label")).getText().replaceAll("[^0-9.]", ""));
+	}
+
+	public double getExpectedTax(double itemTotal) {
+		return itemTotal * 0.08;
+	}
+}

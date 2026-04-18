@@ -1,0 +1,24 @@
+# \u2500\u2500 Browser \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+browser=chrome
+
+# \u2500\u2500 DemoQA URLs \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+# Step 1  : Starting page (task requirement)
+demoqa.links.url=https://demoqa.com/links
+
+# Step 2a : Alerts page
+demoqa.alerts.url=https://demoqa.com/alerts
+
+# Step 2b : Frames page
+demoqa.frames.url=https://demoqa.com/frames
+
+# Step 3  : Browser Windows page
+demoqa.browser.windows.url=https://demoqa.com/browser-windows
+
+# Step 4  : New tab expected URL and heading
+demoqa.newtab.expected.url=https://demoqa.com/sample
+demoqa.newtab.expected.heading=This is a sample page
+
+# Prompt input value used in the alert scenario
+demoqa.prompt.input=DemoQA Test
+
+explicit.wait.seconds=10

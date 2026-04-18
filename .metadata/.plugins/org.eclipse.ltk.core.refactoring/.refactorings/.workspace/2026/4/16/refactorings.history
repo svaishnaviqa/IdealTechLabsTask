@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">&#x0A;<refactoring comment="Copy Project &apos;AutomationTask_UI&apos;" description="Copy Project &apos;AutomationTask_UI&apos;" destination="D:/IdealTechLabs" element="/AutomationTask_UI" flags="7" id="org.eclipse.ltk.core.refactoring.copyproject.resource" name="OrangeHRMTask" stamp="1776497151274"/>&#x0A;<refactoring comment="Copy Project &apos;OrangeHRMTask&apos;" description="Copy Project &apos;OrangeHRMTask&apos;" destination="D:/IdealTechLabs" element="/OrangeHRMTask" flags="7" id="org.eclipse.ltk.core.refactoring.copyproject.resource" name="DemoQATask" stamp="1776507313579"/>
+</session>

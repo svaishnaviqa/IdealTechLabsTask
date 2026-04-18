@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestRunner (2)" project="DemoQATask" tests="4" started="4" failures="0" errors="2" ignored="0">
+  <testsuite name="org.runner.TestRunner" time="0.016">
+    <testsuite name="DemoQA Browser Windows" time="0.016">
+      <testsuite name="Verify new tab functionality" time="0.016" incomplete="true">
+        <error>io.cucumber.junit.UndefinedStepException: The step 'user navigates to DemoQA Browser Windows page' and 3 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("user navigates to DemoQA Browser Windows page")
+public void user_navigates_to_demo_qa_browser_windows_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("user clicks on New Tab button")
+public void user_clicks_on_new_tab_button() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("new tab should open and display sample text")
+public void new_tab_should_open_and_display_sample_text() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("user switches back to original tab")
+public void user_switches_back_to_original_tab() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+&#13;
+&#13;
+</error>
+        <testcase name="user navigates to DemoQA Browser Windows page" classname="Verify new tab functionality" time="0.009">
+          <error>io.cucumber.junit.UndefinedStepException: The step 'user navigates to DemoQA Browser Windows page' and 3 other step(s) are undefined.
+You can implement these steps using the snippet(s) below:
+
+@Given("user navigates to DemoQA Browser Windows page")
+public void user_navigates_to_demo_qa_browser_windows_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@When("user clicks on New Tab button")
+public void user_clicks_on_new_tab_button() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("new tab should open and display sample text")
+public void new_tab_should_open_and_display_sample_text() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+@Then("user switches back to original tab")
+public void user_switches_back_to_original_tab() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+&#13;
+&#13;
+</error>
+        </testcase>
+        <testcase name="user clicks on New Tab button" classname="Verify new tab functionality" time="0.003">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="new tab should open and display sample text" classname="Verify new tab functionality" time="0.0">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="user switches back to original tab" classname="Verify new tab functionality" time="0.003">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testrun>

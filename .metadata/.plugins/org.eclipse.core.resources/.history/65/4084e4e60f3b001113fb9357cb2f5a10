@@ -1,0 +1,54 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import utilities.WebDriverUtility;
+
+public class DemoQA_BrowserWindowsPage {
+
+    WebDriver driver;
+    WebDriverUtility util;
+
+    By alertsFrameWindowsMenu = By.xpath("//div[text()='Alerts, Frame & Windows']");
+    By browserWindowsSubMenu = By.xpath("//span[text()='Browser Windows']");
+    By newTabBtn = By.id("tabButton");
+    By newTabText = By.id("sampleHeading");
+
+    public BrowserWindowsPage(WebDriver driver) {
+
+        this.driver = driver;
+        util = new WebDriverUtility(driver);
+    }
+
+    public void navigateToBrowserWindows() {
+
+        util.openUrl("https://demoqa.com/links");
+
+        util.click(alertsFrameWindowsMenu);
+
+        util.click(browserWindowsSubMenu);
+    }
+
+    public String openNewTabAndVerify() {
+
+        String parentWindow = driver.getWindowHandle();
+
+        util.click(newTabBtn);
+
+        util.switchToNewTab();
+
+        String text = util.getText(newTabText);
+
+        if (!text.equals("This is a sample page")) {
+
+            throw new AssertionError("Sample text not displayed in new tab");
+        }
+
+        driver.close();
+
+        util.switchToParentTab(parentWindow);
+
+        return util.getCurrentUrl();
+    }
+}

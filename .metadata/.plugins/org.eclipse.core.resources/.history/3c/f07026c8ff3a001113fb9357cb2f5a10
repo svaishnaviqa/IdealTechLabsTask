@@ -1,0 +1,125 @@
+package org.stepdefinition;
+
+import java.util.Map;
+
+import org.junit.Assert;
+import org.pageObjects.OrangeHRM_AdminPage;
+import org.pageObjects.OrangeHRM_LoginPage;
+import org.utility.ExtentReport;
+import org.utility.UtilityClass;
+
+import com.aventstack.extentreports.Status;
+
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.Before;
+import io.cucumber.java.en.*;
+
+public class OrangeHRM_AdminSteps extends UtilityClass {
+
+    private OrangeHRM_LoginPage loginPage;
+    private OrangeHRM_AdminPage adminPage;
+    private String createdUsername;
+
+    @Before(order = 2)
+    public void setupPages() {
+        loginPage = new OrangeHRM_LoginPage(driver);
+        adminPage = new OrangeHRM_AdminPage(driver);
+    }
+
+    @Given("I navigate to OrangeHRM login page")
+    public void open_login_page() {
+        driver.get(getValueFromPropertFile("base.url"));
+        ExtentReport.test.log(Status.INFO, "Opened OrangeHRM login page");
+    }
+
+    @And("I login with valid credentials")
+    public void login(DataTable table) {
+
+        Map<String,String> data = table.asMaps().get(0);
+        System.out.println(data.get("password"));
+
+        loginPage.login(data.get("username"), data.get("password"));
+
+        ExtentReport.test.log(Status.INFO,"Logged in successfully");
+    }
+
+    @When("I navigate to Admin menu")
+    public void click_admin_menu() {
+
+        adminPage.clickAdminMenu();
+
+        ExtentReport.test.log(Status.INFO,"Clicked Admin menu");
+    }
+
+    @When("I create a new user with details")
+    public void create_user(DataTable table) throws InterruptedException {
+
+        Map<String,String> data = table.asMaps().get(0);
+
+        createdUsername = data.get("username");
+
+        adminPage.clickAddUser();
+
+        adminPage.createUser(
+                data.get("userRole"),
+                data.get("employeeName"),
+                createdUsername,
+                data.get("status"),
+                data.get("password")
+        );
+
+        ExtentReport.test.log(Status.INFO,"Created user: " + createdUsername);
+    }
+
+    @Then("I should see the user created successfully")
+    public void verify_user_created() {
+
+        Assert.assertTrue(adminPage.isUserPresent(createdUsername));
+
+        ExtentReport.test.log(Status.PASS,"User created successfully");
+    }
+
+    @When("I search the created user {string}")
+    public void search_user(String username) {
+
+        adminPage.searchUser(username);
+
+        ExtentReport.test.log(Status.INFO,"Searched user: " + username);
+    }
+
+    @And("I edit the user details")
+    public void edit_user(DataTable table) {
+
+        Map<String,String> data = table.asMaps().get(0);
+
+        createdUsername = data.get("username");
+
+        adminPage.editUsername(createdUsername);
+
+        ExtentReport.test.log(Status.INFO,"Edited username to: " + createdUsername);
+    }
+
+    @Then("I verify the user is updated")
+    public void verify_user_updated() {
+
+        Assert.assertTrue(adminPage.isUserPresent(createdUsername));
+
+        ExtentReport.test.log(Status.PASS,"User updated successfully");
+    }
+
+    @When("I delete the user {string}")
+    public void delete_user(String username) {
+
+        adminPage.deleteUser(username);
+
+        ExtentReport.test.log(Status.INFO,"Deleted user: " + username);
+    }
+
+    @Then("I verify the user is deleted")
+    public void verify_user_deleted() {
+
+        Assert.assertFalse(adminPage.isUserPresent(createdUsername));
+
+        ExtentReport.test.log(Status.PASS,"User deleted successfully");
+    }
+}

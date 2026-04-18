@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestRunner (2)" project="DemoQATask" tests="26" started="26" failures="0" errors="0" ignored="0">
+  <testsuite name="org.runner.TestRunner" time="25.293">
+    <testsuite name="DemoQA Alerts, Frames and Browser Windows" time="25.293">
+      <testsuite name="Handle all alert types on the Alerts page" time="7.414">
+        <testcase name="user navigates to DemoQA Browser Windows page" classname="Handle all alert types on the Alerts page" time="3.734"/>
+        <testcase name="User clicks on &quot;Alerts, Frame &amp; Windows&quot; in the left panel" classname="Handle all alert types on the Alerts page" time="1.28"/>
+        <testcase name="User clicks on &quot;Alerts&quot; menu item" classname="Handle all alert types on the Alerts page" time="1.307"/>
+        <testcase name="User clicks the &quot;Click me&quot; button to trigger an alert" classname="Handle all alert types on the Alerts page" time="0.367"/>
+        <testcase name="The alert should be accepted successfully" classname="Handle all alert types on the Alerts page" time="0.024"/>
+        <testcase name="User clicks the button to trigger a confirm box" classname="Handle all alert types on the Alerts page" time="0.211"/>
+        <testcase name="The confirm box should be accepted and result shows &quot;You selected Ok&quot;" classname="Handle all alert types on the Alerts page" time="0.093"/>
+        <testcase name="User clicks the button to trigger a prompt and enters &quot;DemoQA Test&quot;" classname="Handle all alert types on the Alerts page" time="0.341"/>
+        <testcase name="The prompt result should display &quot;You entered DemoQA Test&quot;" classname="Handle all alert types on the Alerts page" time="0.055"/>
+      </testsuite>
+      <testsuite name="Verify content inside top and bottom frames" time="8.204">
+        <testcase name="user navigates to DemoQA Browser Windows page" classname="Verify content inside top and bottom frames" time="5.034"/>
+        <testcase name="User clicks on &quot;Alerts, Frame &amp; Windows&quot; in the left panel" classname="Verify content inside top and bottom frames" time="1.311"/>
+        <testcase name="User clicks on &quot;Frames&quot; menu item" classname="Verify content inside top and bottom frames" time="1.309"/>
+        <testcase name="User switches to the top frame" classname="Verify content inside top and bottom frames" time="0.3"/>
+        <testcase name="The top frame should display the heading &quot;This is a sample page&quot;" classname="Verify content inside top and bottom frames" time="0.113"/>
+        <testcase name="User switches back to the main page" classname="Verify content inside top and bottom frames" time="0.004"/>
+        <testcase name="User switches to the bottom frame" classname="Verify content inside top and bottom frames" time="0.083"/>
+        <testcase name="The bottom frame should display the heading &quot;This is a sample page&quot;" classname="Verify content inside top and bottom frames" time="0.042"/>
+        <testcase name="User switches back to the main page" classname="Verify content inside top and bottom frames" time="0.005"/>
+      </testsuite>
+      <testsuite name="Verify new tab opens with correct URL and content" time="6.036">
+        <testcase name="user navigates to DemoQA Browser Windows page" classname="Verify new tab opens with correct URL and content" time="3.616"/>
+        <testcase name="User clicks on &quot;Alerts, Frame &amp; Windows&quot; in the left panel" classname="Verify new tab opens with correct URL and content" time="1.195"/>
+        <testcase name="User clicks on &quot;Browser Windows&quot; menu item" classname="Verify new tab opens with correct URL and content" time="0.303"/>
+        <testcase name="User clicks the &quot;New Tab&quot; button" classname="Verify new tab opens with correct URL and content" time="0.404"/>
+        <testcase name="A new tab should open with the expected URL" classname="Verify new tab opens with correct URL and content" time="0.389"/>
+        <testcase name="The new tab should display the heading &quot;This is a sample page&quot;" classname="Verify new tab opens with correct URL and content" time="0.078"/>
+        <testcase name="User switches back to the original tab" classname="Verify new tab opens with correct URL and content" time="0.024"/>
+        <testcase name="The original tab should still display the Browser Windows page" classname="Verify new tab opens with correct URL and content" time="0.02"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testrun>

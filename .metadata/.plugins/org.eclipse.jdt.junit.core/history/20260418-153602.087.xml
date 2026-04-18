@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestRunner (1)" project="OrangeHRMTask" tests="10" started="10" failures="0" errors="2" ignored="0">
+  <testsuite name="org.runner.TestRunner" time="73.368">
+    <testsuite name="OrangeHRM Admin User Management" time="73.368">
+      <testsuite name="Create, Edit, Search and Delete User" time="73.368" incomplete="true">
+        <error>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //p[contains(@class,'oxd-text--toast-message')] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '4.10.0', revision: 'c14d967899'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.57, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\91805\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:65002}, goog:processID: 5376, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:65002/devtoo..., se:cdpVersion: 147.0.7727.57, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 509f977fc4c8e34b1022c15b18bb1d04&#13;
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)&#13;
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:230)&#13;
+	at org.utility.UtilityClass.waitForElementVisible(UtilityClass.java:183)&#13;
+	at org.pageObjects.OrangeHRM_AdminPage.createUser(OrangeHRM_AdminPage.java:68)&#13;
+	at org.stepdefinition.OrangeHRM_AdminSteps.create_user(OrangeHRM_AdminSteps.java:62)&#13;
+	at ✽.I create a new user with details(file:///D:/IdealTechLabs/OrangeHRMTask/src/test/resources/Features/OrangeHRM_Admin.feature:9)&#13;
+&#13;
+</error>
+        <testcase name="I navigate to OrangeHRM login page" classname="Create, Edit, Search and Delete User" time="6.526"/>
+        <testcase name="I login with valid credentials" classname="Create, Edit, Search and Delete User" time="0.961"/>
+        <testcase name="I navigate to Admin menu" classname="Create, Edit, Search and Delete User" time="18.377"/>
+        <testcase name="I create a new user with details" classname="Create, Edit, Search and Delete User" time="47.495">
+          <error>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //p[contains(@class,'oxd-text--toast-message')] (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '4.10.0', revision: 'c14d967899'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.57, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\91805\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:65002}, goog:processID: 5376, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:65002/devtoo..., se:cdpVersion: 147.0.7727.57, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 509f977fc4c8e34b1022c15b18bb1d04&#13;
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)&#13;
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:230)&#13;
+	at org.utility.UtilityClass.waitForElementVisible(UtilityClass.java:183)&#13;
+	at org.pageObjects.OrangeHRM_AdminPage.createUser(OrangeHRM_AdminPage.java:68)&#13;
+	at org.stepdefinition.OrangeHRM_AdminSteps.create_user(OrangeHRM_AdminSteps.java:62)&#13;
+	at ✽.I create a new user with details(file:///D:/IdealTechLabs/OrangeHRMTask/src/test/resources/Features/OrangeHRM_Admin.feature:9)&#13;
+&#13;
+</error>
+        </testcase>
+        <testcase name="I should see the user created successfully" classname="Create, Edit, Search and Delete User" time="0.002">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I search the created user &quot;testuser1&quot;" classname="Create, Edit, Search and Delete User" time="0.0">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I edit the user details" classname="Create, Edit, Search and Delete User" time="0.0">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I verify the user is updated" classname="Create, Edit, Search and Delete User" time="0.0">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I delete the user &quot;testuser1_updated&quot;" classname="Create, Edit, Search and Delete User" time="0.0">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I verify the user is deleted" classname="Create, Edit, Search and Delete User" time="0.0">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testrun>

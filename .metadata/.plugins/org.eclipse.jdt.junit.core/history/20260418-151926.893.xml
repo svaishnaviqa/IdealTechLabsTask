@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestRunner (1)" project="OrangeHRMTask" tests="10" started="10" failures="0" errors="2" ignored="0">
+  <testsuite name="org.runner.TestRunner" time="23.027">
+    <testsuite name="OrangeHRM Admin User Management" time="23.027">
+      <testsuite name="Create, Edit, Search and Delete User" time="23.027" incomplete="true">
+        <error>org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;button data-v-10d463b7="" type="submit" class="oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space"&gt;...&lt;/button&gt; is not clickable at point (1147, 473). Other element would receive the click: &lt;form data-v-d5bfe35b="" class="oxd-form" novalidate=""&gt;...&lt;/form&gt;
+  (Session info: chrome=147.0.7727.57)
+Build info: version: '4.10.0', revision: 'c14d967899'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [ae77c38a7f425d1788efadc2f3a17778, clickElement {id=f.56FBA052DD97D4654DE6199AA6639BEF.d.0FAC313FE8D95398C7F30142219DA78D.e.172}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.57, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\91805\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52189}, goog:processID: 23536, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52189/devtoo..., se:cdpVersion: 147.0.7727.57, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (ae77c38a7f425d1788efadc2f3a17778)] -&gt; xpath: //button[@type='submit']]
+Session ID: ae77c38a7f425d1788efadc2f3a17778&#13;
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#13;
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#13;
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#13;
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)&#13;
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:199)&#13;
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:132)&#13;
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:51)&#13;
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)&#13;
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)&#13;
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)&#13;
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:531)&#13;
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:242)&#13;
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:77)&#13;
+	at org.pageObjects.OrangeHRM_AdminPage.editUsername(OrangeHRM_AdminPage.java:103)&#13;
+	at org.stepdefinition.OrangeHRM_AdminSteps.edit_user(OrangeHRM_AdminSteps.java:97)&#13;
+	at ✽.I edit the user details(file:///D:/IdealTechLabs/OrangeHRMTask/src/test/resources/Features/OrangeHRM_Admin.feature:15)&#13;
+&#13;
+</error>
+        <testcase name="I navigate to OrangeHRM login page" classname="Create, Edit, Search and Delete User" time="4.383"/>
+        <testcase name="I login with valid credentials" classname="Create, Edit, Search and Delete User" time="0.969"/>
+        <testcase name="I navigate to Admin menu" classname="Create, Edit, Search and Delete User" time="3.262"/>
+        <testcase name="I create a new user with details" classname="Create, Edit, Search and Delete User" time="6.233"/>
+        <testcase name="I should see the user created successfully" classname="Create, Edit, Search and Delete User" time="4.744"/>
+        <testcase name="I search the created user &quot;testuser1&quot;" classname="Create, Edit, Search and Delete User" time="0.387"/>
+        <testcase name="I edit the user details" classname="Create, Edit, Search and Delete User" time="3.028">
+          <error>org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;button data-v-10d463b7="" type="submit" class="oxd-button oxd-button--medium oxd-button--secondary orangehrm-left-space"&gt;...&lt;/button&gt; is not clickable at point (1147, 473). Other element would receive the click: &lt;form data-v-d5bfe35b="" class="oxd-form" novalidate=""&gt;...&lt;/form&gt;
+  (Session info: chrome=147.0.7727.57)
+Build info: version: '4.10.0', revision: 'c14d967899'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [ae77c38a7f425d1788efadc2f3a17778, clickElement {id=f.56FBA052DD97D4654DE6199AA6639BEF.d.0FAC313FE8D95398C7F30142219DA78D.e.172}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.57, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\91805\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:52189}, goog:processID: 23536, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:52189/devtoo..., se:cdpVersion: 147.0.7727.57, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (ae77c38a7f425d1788efadc2f3a17778)] -&gt; xpath: //button[@type='submit']]
+Session ID: ae77c38a7f425d1788efadc2f3a17778&#13;
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)&#13;
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)&#13;
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)&#13;
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)&#13;
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.createException(W3CHttpResponseCodec.java:199)&#13;
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:132)&#13;
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:51)&#13;
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:191)&#13;
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:196)&#13;
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:171)&#13;
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:531)&#13;
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:242)&#13;
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:77)&#13;
+	at org.pageObjects.OrangeHRM_AdminPage.editUsername(OrangeHRM_AdminPage.java:103)&#13;
+	at org.stepdefinition.OrangeHRM_AdminSteps.edit_user(OrangeHRM_AdminSteps.java:97)&#13;
+	at ✽.I edit the user details(file:///D:/IdealTechLabs/OrangeHRMTask/src/test/resources/Features/OrangeHRM_Admin.feature:15)&#13;
+&#13;
+</error>
+        </testcase>
+        <testcase name="I verify the user is updated" classname="Create, Edit, Search and Delete User" time="0.009">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I delete the user &quot;testuser1_updated&quot;" classname="Create, Edit, Search and Delete User" time="0.001">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+        <testcase name="I verify the user is deleted" classname="Create, Edit, Search and Delete User" time="0.001">
+          <skipped>io.cucumber.junit.SkippedThrowable: This step is skipped&#13;
+&#13;
+</skipped>
+        </testcase>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testrun>

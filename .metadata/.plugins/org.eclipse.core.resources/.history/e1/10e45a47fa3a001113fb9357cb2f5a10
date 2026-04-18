@@ -1,0 +1,25 @@
+package org.pageObjects;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+public class HomePage {
+    WebDriver driver;
+
+    public HomePage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void addItemToCart(String itemName) {
+        driver.findElement(By.xpath("//div[text()='" + itemName + "']/ancestor::div[@class='inventory_item']//button")).click();
+    }
+
+    public void openCart() {
+        driver.findElement(By.className("shopping_cart_link")).click();
+    }
+
+    public int getCartCount() {
+        return Integer.parseInt(driver.findElement(By.className("shopping_cart_badge")).getText());
+    }
+}

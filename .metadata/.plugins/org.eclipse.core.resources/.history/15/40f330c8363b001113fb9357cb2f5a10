@@ -1,0 +1,114 @@
+package org.utility;
+
+import java.io.FileReader;
+import java.time.Duration;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class UtilityClass {
+	public static WebDriver driver;
+
+	public static WebDriver getDriver(String browsername) {
+		if (browsername.equalsIgnoreCase("chrome")) {
+
+			WebDriverManager.chromedriver().setup();
+			ChromeOptions options = new ChromeOptions();
+
+			options.addArguments("--disable-notifications");
+			options.addArguments("--disable-save-password-bubble");
+			options.addArguments("--disable-infobars");
+			options.addArguments("--disable-extensions");
+			options.addArguments("--disable-popup-blocking");
+			options.addArguments("--disable-password-manager-reauthentication");
+			options.setExperimentalOption("prefs", new java.util.HashMap<String, Object>() {
+				{
+					put("credentials_enable_service", false);
+					put("profile.password_manager_enabled", false);
+				}
+			});
+
+			driver = new ChromeDriver(options);
+		}
+
+		else if (browsername.equalsIgnoreCase("firefox")) {
+			WebDriverManager.firefoxdriver().setup();
+			driver = new FirefoxDriver();
+		} else if (browsername.equalsIgnoreCase("edge")) {
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
+		} else {
+			System.out.println("Invalid Browser name");
+			throw new WebDriverException();
+		}
+		driver.manage().window().maximize();
+		return driver;
+
+	}
+
+	public static void quitDriver() {
+		if (driver != null) {
+			driver.quit();
+			driver = null;
+		}
+	}
+
+	public void implicitWait(long sec) {
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+	}
+
+	public void jsClick(WebElement e) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].click()", e);
+	}
+
+	public void clickButton(WebElement e) {
+		WebDriverWait w = new WebDriverWait(driver, Duration.ofSeconds(20));
+		w.until(ExpectedConditions.elementToBeClickable(e));
+		try {
+			e.click();
+		} catch (Exception ex) {
+			jsClick(e);
+			ex.printStackTrace();
+		}
+	}
+
+	public String getText(WebElement e) {
+		return e.getText();
+	}
+
+	public static String getValueFromPropertFile(String key) {
+		String value = null;
+		try {
+			Properties p = new Properties();
+			p.load(new FileReader(
+					System.getProperty("user.dir") + "\\src\\test\\resources\\config\\config.properties"));
+			value = p.get(key).toString();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return value;
+	}
+
+	public void waitForElementVisible(By locator) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+	}
+
+	public void waitForElementClickable(By locator) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait.until(ExpectedConditions.elementToBeClickable(locator));
+	}
+}

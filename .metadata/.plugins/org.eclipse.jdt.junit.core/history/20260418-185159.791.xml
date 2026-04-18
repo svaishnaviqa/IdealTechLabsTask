@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestRunner (1)" project="OrangeHRMTask" tests="10" started="10" failures="0" errors="0" ignored="0">
+  <testsuite name="org.runner.TestRunner" time="73.54">
+    <testsuite name="OrangeHRM Admin User Management" time="73.54">
+      <testsuite name="Create, Edit, Search and Delete User" time="73.54">
+        <testcase name="I navigate to OrangeHRM login page" classname="Create, Edit, Search and Delete User" time="6.378"/>
+        <testcase name="I login with valid credentials" classname="Create, Edit, Search and Delete User" time="0.656"/>
+        <testcase name="I navigate to Admin menu" classname="Create, Edit, Search and Delete User" time="2.554"/>
+        <testcase name="I create a new user with details" classname="Create, Edit, Search and Delete User" time="5.102"/>
+        <testcase name="I should see the user created successfully" classname="Create, Edit, Search and Delete User" time="3.709"/>
+        <testcase name="I search the created user &quot;testuser8&quot;" classname="Create, Edit, Search and Delete User" time="0.256"/>
+        <testcase name="I edit the user details" classname="Create, Edit, Search and Delete User" time="1.72"/>
+        <testcase name="I verify the user is updated" classname="Create, Edit, Search and Delete User" time="5.702"/>
+        <testcase name="I delete the user &quot;testuser8_updated&quot;" classname="Create, Edit, Search and Delete User" time="7.132"/>
+        <testcase name="I verify the user is deleted" classname="Create, Edit, Search and Delete User" time="40.328"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testrun>

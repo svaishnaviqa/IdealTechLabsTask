@@ -1,0 +1,82 @@
+package org.pageObjects;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+public class DemoQA_BrowserWindowsPage {
+	 // ── Left-panel navigation ─────────────────────────────────────────────────
+	 
+    /**
+     * The collapsible group header "Alerts, Frame & Windows" in the left sidebar.
+     * Uses XPath text match so it is immune to class-name changes.
+     */
+    @FindBy(xpath = "//div[contains(@class,'element-group')]//div[contains(@class,'header-text') and text()='Alerts, Frame & Windows']")
+    private WebElement alertsFrameWindowsGroup;
+ 
+    /**
+     * "Browser Windows" menu item inside the expanded group.
+     */
+    @FindBy(xpath = "//span[text()='Browser Windows']")
+    private WebElement browserWindowsMenuItem;
+ 
+    // ── Browser Windows page elements ─────────────────────────────────────────
+ 
+    /** "New Tab" button on the Browser Windows page. */
+    @FindBy(id = "tabButton")
+    private WebElement newTabButton;
+ 
+    /** "New Window" button (not used in this scenario, kept for completeness). */
+    @FindBy(id = "windowButton")
+    private WebElement newWindowButton;
+ 
+    // ── Locators (used with waitFor* helpers that accept By) ──────────────────
+ 
+    public static final By NEW_TAB_BUTTON_LOC   = By.id("tabButton");
+    public static final By ALERTS_GROUP_HEADER  = By.xpath(
+            "//div[contains(@class,'element-group')]" +
+            "//div[contains(@class,'header-text') and text()='Alerts, Frame & Windows']");
+    public static final By BROWSER_WINDOWS_ITEM = By.xpath("//span[text()='Browser Windows']");
+ 
+    // ── Constructor ───────────────────────────────────────────────────────────
+ 
+    public BrowserWindowsPage() {
+        PageFactory.initElements(driver, this);
+    }
+ 
+    // ── Actions ───────────────────────────────────────────────────────────────
+ 
+    /**
+     * Expand the "Alerts, Frame & Windows" accordion group in the left panel.
+     * If it is already expanded the click is harmless.
+     */
+    public void clickAlertsFrameWindowsGroup() {
+        waitForElementVisible(ALERTS_GROUP_HEADER);
+        clickButton(alertsFrameWindowsGroup);
+    }
+ 
+    /**
+     * Click the "Browser Windows" menu item (visible after the group is expanded).
+     */
+    public void clickBrowserWindowsMenuItem() {
+        waitForElementVisible(BROWSER_WINDOWS_ITEM);
+        clickButton(browserWindowsMenuItem);
+    }
+ 
+    /**
+     * Click the "New Tab" button that opens a brand-new browser tab.
+     */
+    public void clickNewTabButton() {
+        waitForElementClickable(NEW_TAB_BUTTON_LOC);
+        clickButton(newTabButton);
+    }
+ 
+    // ── Getters for assertions ────────────────────────────────────────────────
+ 
+    public String getCurrentPageTitle() {
+        return driver.getTitle();
+    }
+ 
+    public String getCurrentPageUrl() {
+        return driver.getCurrentUrl();
+    }
+}

@@ -1,0 +1,132 @@
+package org.pageObjects;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.utility.UtilityClass;
+
+public class OrangeHRM_AdminPage extends UtilityClass {
+
+	WebDriver driver;
+
+	public OrangeHRM_AdminPage(WebDriver driver) {
+		this.driver = driver;
+	}
+
+	By adminMenu = By.xpath("//span[text()='Admin']");
+	By addBtn = By.xpath("//button[normalize-space()='Add']");
+	By usernameField = By.xpath("(//input[@class='oxd-input oxd-input--active'])[2]");
+	By passwordField = By.xpath("(//input[@type='password'])[1]");
+	By confirmPassword = By.xpath("(//input[@type='password'])[2]");
+	By saveBtn = By.xpath("//button[@type='submit']");
+	By searchUser = By.xpath("(//input[@class='oxd-input oxd-input--active'])[2]");
+	By searchBtn = By.xpath("//button[normalize-space()='Search']");
+	By deleteBtn = By.xpath("//i[@class='oxd-icon bi-trash']");
+	By confirmDelete = By.xpath("//button[normalize-space()='Yes, Delete']");
+	By userRoleDropdown = By.xpath("(//div[@class='oxd-select-text oxd-select-text--active'])[1]");
+	By userRoleOptions = By.xpath("//div[@role='listbox']//span");
+	By statusDropdown = By.xpath("(//div[@class='oxd-select-text oxd-select-text--active'])[2]");
+	By employeeNameField = By.xpath("//input[@placeholder='Type for hints...']");
+	By successMsg = By.xpath("//p[contains(@class,'oxd-text--toast-message')]");
+	By employeeSuggestion = By.xpath("//div[@role='listbox']//span");
+
+	public void clickAdminMenu() {
+
+		driver.findElement(adminMenu).click();
+	}
+
+	public void clickAddUser() {
+
+		driver.findElement(addBtn).click();
+	}
+
+	public boolean createUser(String role, String employee, String username, String status, String password) {
+
+//		waitForElementClickable(userRoleDropdown);
+
+		clickButton(driver.findElement(userRoleDropdown));
+
+		waitForElementVisible(userRoleOptions);
+		List<WebElement> roles = driver.findElements(userRoleOptions);
+
+		for (WebElement r : roles) {
+
+			String text = r.getText();
+
+			System.out.println("Role found: " + text);
+
+			if (text.equalsIgnoreCase(roleName)) {
+
+				role.click();
+
+				break;
+			}
+		}
+//		waitForElementVisible(userRoleDropdown);
+//		clickButton(driver.findElement(userRoleDropdown));
+//		driver.findElement(By.xpath("//span[text()='" + role + "']")).click();
+//		System.out.println("sample");
+//        driver.findElement(By.xpath("//span[text()='"+role+"']")).click();
+
+		enterValue(driver.findElement(employeeNameField), employee);
+
+		waitForElementVisible(employeeSuggestion);
+
+		clickButton(driver.findElements(employeeSuggestion).get(0));
+
+		driver.findElement(By.xpath("//div[@role='option']")).click();
+
+		clickButton(driver.findElement(statusDropdown));
+
+		driver.findElement(By.xpath("//span[text()='" + status + "']")).click();
+
+		driver.findElement(usernameField).sendKeys(username);
+
+		driver.findElement(passwordField).sendKeys(password);
+
+		driver.findElement(confirmPassword).sendKeys(password);
+
+		driver.findElement(saveBtn).click();
+
+		waitForElementVisible(successMsg);
+
+		String msg = driver.findElement(successMsg).getText();
+		System.out.println(msg);
+
+		return msg.contains("Successfully Saved");
+	}
+
+	public void searchUser(String username) {
+
+		driver.findElement(searchUser).sendKeys(username);
+
+		driver.findElement(searchBtn).click();
+	}
+
+	public boolean isUserPresent(String username) {
+
+		return driver.getPageSource().contains(username);
+	}
+
+	public void editUsername(String username) {
+
+		driver.findElement(By.xpath("//i[@class='oxd-icon bi-pencil-fill']")).click();
+
+		driver.findElement(usernameField).clear();
+
+		driver.findElement(usernameField).sendKeys(username);
+
+		driver.findElement(saveBtn).click();
+	}
+
+	public void deleteUser(String username) {
+
+		searchUser(username);
+
+		driver.findElement(deleteBtn).click();
+
+		driver.findElement(confirmDelete).click();
+	}
+}

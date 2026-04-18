@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestRunner (1)" project="OrangeHRMTask" tests="10" started="4" failures="0" errors="2" ignored="0">
+  <testsuite name="org.runner.TestRunner" incomplete="true">
+    <testsuite name="OrangeHRM Admin User Management" incomplete="true">
+      <testsuite name="Create, Edit, Search and Delete User" time="44.158" incomplete="true">
+        <error>org.junit.runner.notification.StoppedByUserException&#13;
+	at org.junit.runner.notification.RunNotifier.fireTestStarted(RunNotifier.java:151)&#13;
+	at io.cucumber.junit.JUnitReporter$EachTestNotifier.fireTestStarted(JUnitReporter.java:236)&#13;
+	at io.cucumber.junit.JUnitReporter.handTestStepStarted(JUnitReporter.java:88)&#13;
+	at io.cucumber.core.eventbus.AbstractEventPublisher.send(AbstractEventPublisher.java:51)&#13;
+	at io.cucumber.core.eventbus.AbstractEventBus.send(AbstractEventBus.java:12)&#13;
+	at io.cucumber.core.runtime.ThreadLocalRunnerSupplier$LocalEventBus.send(ThreadLocalRunnerSupplier.java:61)&#13;
+	at io.cucumber.core.runner.TestStep.emitTestStepStarted(TestStep.java:74)&#13;
+	at io.cucumber.core.runner.TestStep.run(TestStep.java:52)&#13;
+	at io.cucumber.core.runner.PickleStepTestStep.run(PickleStepTestStep.java:51)&#13;
+	at io.cucumber.core.runner.TestCase.run(TestCase.java:84)&#13;
+	at io.cucumber.core.runner.Runner.runPickle(Runner.java:75)&#13;
+	at io.cucumber.junit.PickleRunners$WithStepDescriptions.lambda$run$1(PickleRunners.java:109)&#13;
+	at io.cucumber.core.runtime.CucumberExecutionContext.lambda$runTestCase$5(CucumberExecutionContext.java:129)&#13;
+	at io.cucumber.core.runtime.RethrowingThrowableCollector.executeAndThrow(RethrowingThrowableCollector.java:23)&#13;
+	at io.cucumber.core.runtime.CucumberExecutionContext.runTestCase(CucumberExecutionContext.java:129)&#13;
+	at io.cucumber.junit.PickleRunners$WithStepDescriptions.run(PickleRunners.java:106)&#13;
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:144)&#13;
+	at io.cucumber.junit.FeatureRunner.runChild(FeatureRunner.java:28)&#13;
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)&#13;
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)&#13;
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)&#13;
+	at io.cucumber.junit.FeatureRunner.run(FeatureRunner.java:137)&#13;
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:196)&#13;
+	at io.cucumber.junit.Cucumber.runChild(Cucumber.java:89)&#13;
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)&#13;
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)&#13;
+	at io.cucumber.junit.Cucumber$RunBeforeAllHooks.evaluate(Cucumber.java:266)&#13;
+	at io.cucumber.junit.Cucumber$RunAfterAllHooks.evaluate(Cucumber.java:281)&#13;
+	at io.cucumber.junit.Cucumber$StartTestRun.evaluate(Cucumber.java:233)&#13;
+	at io.cucumber.junit.Cucumber$FinishTestRun.evaluate(Cucumber.java:248)&#13;
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)&#13;
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)&#13;
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)&#13;
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:93)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:520)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:748)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:443)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:211)&#13;
+&#13;
+</error>
+        <testcase name="I navigate to OrangeHRM login page" classname="Create, Edit, Search and Delete User" time="4.767"/>
+        <testcase name="I login with valid credentials" classname="Create, Edit, Search and Delete User" time="3.187"/>
+        <testcase name="I navigate to Admin menu" classname="Create, Edit, Search and Delete User" time="11.661"/>
+        <testcase name="I create a new user with details" classname="Create, Edit, Search and Delete User" time="24.536">
+          <error>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of element located by By.xpath: //div[@role='listbox']//span (tried for 20 second(s) with 500 milliseconds interval)
+Build info: version: '4.10.0', revision: 'c14d967899'
+System info: os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '1.8.0_202'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 147.0.7727.57, chrome: {chromedriverVersion: 147.0.7727.57 (b4f28b5637d0..., userDataDir: C:\Users\91805\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:58531}, goog:processID: 14560, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:58531/devtoo..., se:cdpVersion: 147.0.7727.57, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: a78fdaad3324821f2f3427ef25a45556&#13;
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)&#13;
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:230)&#13;
+	at org.utility.UtilityClass.waitForElementVisible(UtilityClass.java:159)&#13;
+	at org.pageObjects.OrangeHRM_AdminPage.createUser(OrangeHRM_AdminPage.java:75)&#13;
+	at org.stepdefinition.OrangeHRM_AdminSteps.create_user(OrangeHRM_AdminSteps.java:62)&#13;
+	at ✽.I create a new user with details(file:///D:/IdealTechLabs/OrangeHRMTask/src/test/resources/Features/OrangeHRM_Admin.feature:9)&#13;
+&#13;
+</error>
+        </testcase>
+        <testcase name="I should see the user created successfully" classname="Create, Edit, Search and Delete User" incomplete="true"/>
+        <testcase name="I search the created user &quot;testuser1&quot;" classname="Create, Edit, Search and Delete User" incomplete="true"/>
+        <testcase name="I edit the user details" classname="Create, Edit, Search and Delete User" incomplete="true"/>
+        <testcase name="I verify the user is updated" classname="Create, Edit, Search and Delete User" incomplete="true"/>
+        <testcase name="I delete the user &quot;testuser1_updated&quot;" classname="Create, Edit, Search and Delete User" incomplete="true"/>
+        <testcase name="I verify the user is deleted" classname="Create, Edit, Search and Delete User" incomplete="true"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testrun>

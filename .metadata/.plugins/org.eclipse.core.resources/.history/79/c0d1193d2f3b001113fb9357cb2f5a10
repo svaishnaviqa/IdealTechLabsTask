@@ -1,0 +1,120 @@
+package org.stepdefinition;
+
+import org.pageObjects.DemoQA_BrowserWindowsPage;
+import org.utility.ExtentReport;
+import org.utility.UtilityClass;
+
+public class DemoQA_BrowserWindowSteps extends UtilityClass {
+
+	
+	 // ── URLs loaded from config.properties ────────────────────────────────────
+    private static final String DEMOQA_LINKS_URL     = getValueFromPropertFile("demoqa.links.url");
+    private static final String NEW_TAB_EXPECTED_URL = getValueFromPropertFile("demoqa.newtab.expected.url");
+ 
+    // ── State ─────────────────────────────────────────────────────────────────
+    private DemoQA_BrowserWindowsPage page;
+    private String originalWindowHandle;
+    private String newTabHandle;
+ 
+    // ── Background ────────────────────────────────────────────────────────────
+ 
+    @Given("User navigates to DemoQA Links page")
+    public void userNavigatesToDemoQALinksPage() {
+        driver.get(DEMOQA_LINKS_URL);
+        originalWindowHandle = driver.getWindowHandle();
+        page = new DemoQA_BrowserWindowsPage();
+ 
+        ExtentReport.test.info("Navigated to: " + DEMOQA_LINKS_URL);
+        ExtentReport.test.info("Original window handle: " + originalWindowHandle);
+    }
+ 
+    // ── Navigation steps ──────────────────────────────────────────────────────
+ 
+    @Given("User clicks on {string} in the left panel")
+    public void userClicksOnGroupInLeftPanel(String groupName) {
+        page.clickAlertsFrameWindowsGroup();
+        ExtentReport.test.info("Clicked accordion group: " + groupName);
+    }
+ 
+    @And("User clicks on {string} menu item")
+    public void userClicksOnMenuItem(String menuItem) {
+        page.clickBrowserWindowsMenuItem();
+ 
+        String currentUrl = page.getCurrentPageUrl();
+        String expectedUrl = getValueFromPropertFile("demoqa.browser.windows.url");
+ 
+        assertTrue(
+            "Expected URL: " + expectedUrl + " but was: " + currentUrl,
+            currentUrl.contains("browser-windows")
+        );
+ 
+        ExtentReport.test.pass("Navigated to Browser Windows page. URL: " + currentUrl);
+    }
+ 
+    // ── Action steps ──────────────────────────────────────────────────────────
+ 
+    @When("User clicks the {string} button")
+    public void userClicksTheButton(String buttonLabel) {
+        Set<String> handlesBefore = driver.getWindowHandles();
+ 
+        if (buttonLabel.equalsIgnoreCase("New Tab")) {
+            page.clickNewTabButton();
+        }
+ 
+        ExtentReport.test.info("Clicked button: " + buttonLabel);
+ 
+        // Poll up to 5 s for the new tab handle to appear
+        long deadline = System.currentTimeMillis() + 5_000;
+        while (System.currentTimeMillis() < deadline) {
+            Set<String> handlesAfter = driver.getWindowHandles();
+            if (handlesAfter.size() > handlesBefore.size()) {
+                handlesAfter.removeAll(handlesBefore);
+                newTabHandle = handlesAfter.iterator().next();
+                break;
+            }
+            try { Thread.sleep(300); } catch (InterruptedException ignored) {}
+        }
+ 
+        assertNotNull("New tab did not open within the timeout.", newTabHandle);
+        ExtentReport.test.info("New tab detected. Handle: " + newTabHandle);
+    }
+ 
+    // ── Verification steps ────────────────────────────────────────────────────
+ 
+    @Then("A new tab should open with the expected URL")
+    public void aNewTabShouldOpenWithExpectedURL() {
+        driver.switchTo().window(newTabHandle);
+ 
+        String actualUrl = driver.getCurrentUrl();
+        ExtentReport.test.info("New tab URL: " + actualUrl);
+ 
+        assertEquals(
+            "New tab URL mismatch.\nExpected : " + NEW_TAB_EXPECTED_URL +
+            "\nActual   : " + actualUrl,
+            NEW_TAB_EXPECTED_URL, actualUrl
+        );
+ 
+        ExtentReport.test.pass("New tab opened at expected URL: " + actualUrl);
+    }
+ 
+    @When("User switches back to the original tab")
+    public void userSwitchesBackToOriginalTab() {
+        driver.switchTo().window(originalWindowHandle);
+        ExtentReport.test.info("Switched back to original tab. Handle: " + originalWindowHandle);
+    }
+ 
+    @Then("The original tab should still display the Browser Windows page")
+    public void originalTabShouldDisplayBrowserWindowsPage() {
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = getValueFromPropertFile("demoqa.browser.windows.url");
+ 
+        ExtentReport.test.info("Original tab URL after switch: " + currentUrl);
+ 
+        assertTrue(
+            "Expected URL: " + expectedUrl + " but was: " + currentUrl,
+            currentUrl.contains("browser-windows")
+        );
+ 
+        ExtentReport.test.pass("Original tab still on Browser Windows page: " + currentUrl);
+    }
+}

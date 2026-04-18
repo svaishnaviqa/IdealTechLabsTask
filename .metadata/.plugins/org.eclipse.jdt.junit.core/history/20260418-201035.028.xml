@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="TestRunner (2)" project="DemoQATask" tests="8" started="8" failures="0" errors="0" ignored="0">
+  <testsuite name="org.runner.TestRunner" time="7.375">
+    <testsuite name="DemoQA Browser Windows" time="7.375">
+      <testsuite name="Verify new tab opens with correct URL and content" time="7.375">
+        <testcase name="user navigates to DemoQA Browser Windows page" classname="Verify new tab opens with correct URL and content" time="4.765"/>
+        <testcase name="User clicks on &quot;Alerts, Frame &amp; Windows&quot; in the left panel" classname="Verify new tab opens with correct URL and content" time="1.422"/>
+        <testcase name="User clicks on &quot;Browser Windows&quot; menu item" classname="Verify new tab opens with correct URL and content" time="0.386"/>
+        <testcase name="User clicks the &quot;New Tab&quot; button" classname="Verify new tab opens with correct URL and content" time="0.331"/>
+        <testcase name="A new tab should open with the expected URL" classname="Verify new tab opens with correct URL and content" time="0.309"/>
+        <testcase name="The new tab should display the heading &quot;This is a sample page&quot;" classname="Verify new tab opens with correct URL and content" time="0.119"/>
+        <testcase name="User switches back to the original tab" classname="Verify new tab opens with correct URL and content" time="0.022"/>
+        <testcase name="The original tab should still display the Browser Windows page" classname="Verify new tab opens with correct URL and content" time="0.018"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testrun>

@@ -1,0 +1,115 @@
+package org.pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.utility.UtilityClass;
+
+/**
+ * Page Object for the DemoQA "Browser Windows" page.
+ *
+ * Covers:
+ *   Step 2 – Alerts, Frame & Windows group navigation
+ *   Step 3 – Browser Windows menu item
+ *   Step 4 – New Tab button + heading verification on the new tab
+ *   Step 5 – Original-tab verification (via driver state, no extra element needed)
+ */
+public class DemoQA_AlertPage extends UtilityClass {
+
+    // ── Left-panel navigation ─────────────────────────────────────────────────
+
+    /**
+     * The collapsible group header "Alerts, Frame & Windows" in the left sidebar.
+     * XPath text-match keeps this immune to class-name changes.
+     */
+    @FindBy(xpath = "//div[contains(@class,'element-group')]"
+                  + "//div[contains(@class,'header-text') and text()='Alerts, Frame & Windows']")
+    private WebElement alertsFrameWindowsGroup;
+
+    /**
+     * "Browser Windows" menu item – visible only after the group is expanded.
+     */
+    @FindBy(xpath = "//span[text()='Browser Windows']")
+    private WebElement browserWindowsMenuItem;
+
+    // ── Browser Windows page ─────────────────────────────────────────────────
+
+    /** "New Tab" button. */
+    @FindBy(id = "tabButton")
+    private WebElement newTabButton;
+
+    /** "New Window" button (kept for completeness). */
+    @FindBy(id = "windowButton")
+    private WebElement newWindowButton;
+
+    // ── New-tab page element ──────────────────────────────────────────────────
+
+    /**
+     * Heading element on the page that opens in the new tab
+     * (https://demoqa.com/sample).
+     */
+    @FindBy(id = "sampleHeading")
+    private WebElement sampleHeading;
+
+    // ── By-locators (used with waitFor* helpers) ──────────────────────────────
+
+    public static final By ALERTS_GROUP_HEADER  = By.xpath(
+            "//div[contains(@class,'element-group')]"
+          + "//div[contains(@class,'header-text') and text()='Alerts, Frame & Windows']");
+
+    public static final By BROWSER_WINDOWS_ITEM = By.xpath("//span[text()='Browser Windows']");
+
+    public static final By NEW_TAB_BUTTON_LOC   = By.id("tabButton");
+
+    public static final By SAMPLE_HEADING_LOC   = By.id("sampleHeading");
+
+    // ── Constructor ───────────────────────────────────────────────────────────
+
+    public DemoQA_AlertPage() {
+        PageFactory.initElements(driver, this);
+    }
+
+    // ── Actions ───────────────────────────────────────────────────────────────
+
+    /**
+     * Step 2 – Expand the "Alerts, Frame & Windows" accordion group.
+     * A second click is harmless if it is already expanded.
+     */
+    public void clickAlertsFrameWindowsGroup() {
+        waitForElementVisible(ALERTS_GROUP_HEADER);
+        clickButton(alertsFrameWindowsGroup);
+    }
+
+    /**
+     * Step 3 – Click the "Browser Windows" menu item.
+     */
+    public void clickBrowserWindowsMenuItem() {
+        waitForElementVisible(BROWSER_WINDOWS_ITEM);
+        clickButton(browserWindowsMenuItem);
+    }
+
+    /**
+     * Step 4 – Click the "New Tab" button that opens a new browser tab.
+     */
+    public void clickNewTabButton() {
+        waitForElementClickable(NEW_TAB_BUTTON_LOC);
+        clickButton(newTabButton);
+    }
+
+    // ── Getters for assertions ────────────────────────────────────────────────
+
+    /** Returns the visible text of the heading on the new-tab sample page. */
+    public String getSampleHeadingText() {
+        waitForElementVisible(SAMPLE_HEADING_LOC);
+        return getText(sampleHeading);
+    }
+
+    public String getCurrentPageTitle() {
+        return driver.getTitle();
+    }
+
+    public String getCurrentPageUrl() {
+        return driver.getCurrentUrl();
+    }
+}

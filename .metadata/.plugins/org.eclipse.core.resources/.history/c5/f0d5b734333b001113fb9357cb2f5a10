@@ -1,0 +1,20 @@
+Feature: DemoQA Browser Windows
+
+  # Task 2 – covers all 5 required steps:
+  #   1. Navigate to https://demoqa.com/links
+  #   2. Handle Alerts, Frames & Windows scenarios
+  #   3. Click on Browser Windows
+  #   4. Open a new tab and verify
+  #   5. Switch back to the original tab and verify
+
+  Background:
+    Given user navigates to DemoQA Browser Windows page
+
+  Scenario: Verify new tab opens with correct URL and content
+    Given User clicks on "Alerts, Frame & Windows" in the left panel
+    And   User clicks on "Browser Windows" menu item
+    When  User clicks the "New Tab" button
+    Then  A new tab should open with the expected URL
+    And   The new tab should display the heading "This is a sample page"
+    When  User switches back to the original tab
+    Then  The original tab should still display the Browser Windows page

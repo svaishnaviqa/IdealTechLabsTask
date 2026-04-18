@@ -1,0 +1,91 @@
+package org.pageObjects;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.utility.UtilityClass;
+
+/**
+ * Page Object for the DemoQA "Browser Windows" page.
+ *
+ * Covers:
+ *   Step 3 – Browser Windows menu item click + URL check
+ *   Step 4 – New Tab button click + new-tab URL and heading verification
+ *   Step 5 – Original-tab verification (via driver state)
+ *
+ * Left-panel navigation (Alerts, Frames group) is shared and handled
+ * by the individual scenario step definitions via the ALERTS_GROUP_HEADER locator.
+ */
+public class DemoQA_BrowserWindowsPage extends UtilityClass {
+
+    // ── Left-panel navigation ─────────────────────────────────────────────────
+
+    @FindBy(xpath = "//div[contains(@class,'element-group')]"
+                  + "//div[contains(@class,'header-text') and text()='Alerts, Frame & Windows']")
+    private WebElement alertsFrameWindowsGroup;
+
+    @FindBy(xpath = "//span[text()='Browser Windows']")
+    private WebElement browserWindowsMenuItem;
+
+    // ── Browser Windows page ─────────────────────────────────────────────────
+
+    @FindBy(id = "tabButton")
+    private WebElement newTabButton;
+
+    @FindBy(id = "windowButton")
+    private WebElement newWindowButton;
+
+    // ── New-tab page element ──────────────────────────────────────────────────
+
+    @FindBy(id = "sampleHeading")
+    private WebElement sampleHeading;
+
+    // ── By-locators ───────────────────────────────────────────────────────────
+
+    public static final By ALERTS_GROUP_HEADER  = By.xpath(
+            "//div[contains(@class,'element-group')]"
+          + "//div[contains(@class,'header-text') and text()='Alerts, Frame & Windows']");
+
+    public static final By BROWSER_WINDOWS_ITEM = By.xpath("//span[text()='Browser Windows']");
+    public static final By NEW_TAB_BUTTON_LOC   = By.id("tabButton");
+    public static final By SAMPLE_HEADING_LOC   = By.id("sampleHeading");
+
+    // ── Constructor ───────────────────────────────────────────────────────────
+
+    public DemoQA_BrowserWindowsPage() {
+        PageFactory.initElements(driver, this);
+    }
+
+    // ── Actions ───────────────────────────────────────────────────────────────
+
+    public void clickAlertsFrameWindowsGroup() {
+        waitForElementVisible(ALERTS_GROUP_HEADER);
+        clickButton(alertsFrameWindowsGroup);
+    }
+
+    public void clickBrowserWindowsMenuItem() {
+        waitForElementVisible(BROWSER_WINDOWS_ITEM);
+        clickButton(browserWindowsMenuItem);
+    }
+
+    public void clickNewTabButton() {
+        waitForElementClickable(NEW_TAB_BUTTON_LOC);
+        clickButton(newTabButton);
+    }
+
+    // ── Getters ───────────────────────────────────────────────────────────────
+
+    public String getSampleHeadingText() {
+        waitForElementVisible(SAMPLE_HEADING_LOC);
+        return getText(sampleHeading);
+    }
+
+    public String getCurrentPageTitle() {
+        return driver.getTitle();
+    }
+
+    public String getCurrentPageUrl() {
+        return driver.getCurrentUrl();
+    }
+}
